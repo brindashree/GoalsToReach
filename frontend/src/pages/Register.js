@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Form, Input, Button } from "antd";
+import { Form, Button } from "antd";
 import goalImage from "../assets/goal.jpg";
 import colors from "../themes/colors";
 
@@ -9,19 +9,36 @@ const ImageContainer = styled.div`
 		width: 100%;
 		height: 100%;
 	}
+	@media only screen and (max-width: 600px) {
+		display: none;
+	}
 `;
 const MainContainer = styled.div`
 	display: flex;
 	width: 900px;
-	margin: 3rem auto;
+	margin: 4rem auto;
 	box-shadow: 0 0 7px #ced3e0;
 	border-radius: 5px;
+	@media only screen and (max-width: 600px) {
+		flex-direction: column;
+		width: 100%;
+		margin: 3rem 0;
+	}
 `;
 const FormContainer = styled.div`
 	width: 50%;
-
 	.ant-form {
 		padding: 2rem;
+	}
+
+	.ant-form-item-explain-error {
+		color: ${colors.alertRed};
+	}
+	@media only screen and (max-width: 600px) {
+		width: 100%;
+		.ant-form {
+			padding: 1rem;
+		}
 	}
 `;
 const FormItem = styled(Form.Item)`
@@ -30,6 +47,7 @@ const FormItem = styled(Form.Item)`
 		.ant-form-item-label {
 			margin-bottom: 1rem;
 			font-weight: 700;
+			color: ${colors.logoDarkBlue};
 		}
 	}
 `;
@@ -37,23 +55,23 @@ const StyledHeader = styled.p`
 	font-size: 1.5rem;
 	text-align: center;
 	font-weight: 700;
-	margin-bottom: 1rem;
+	margin: 1rem;
 	color: ${colors.logoDarkBlue};
 	span {
 		color: ${colors.logoLightBlue};
 	}
 `;
-const StyledInput = styled(Input)`
-	&& {
-		width: 21rem;
-		padding: 1rem;
-		border: 2px solid #ced3e0;
-		border-radius: 5px;
-		outline: none;
-		transition: all 0.2s;
-		&:focus {
-			border: 2px solid ${colors.darkBlue};
-		}
+const StyledInput = styled.input`
+	padding-left: 1rem;
+	border: 2px solid #ced3e0;
+	border-radius: 5px;
+	outline: none;
+	height: 3rem;
+	font-size: 1.25rem;
+	transition: all 0.2s;
+	width: -webkit-fill-available;
+	&:focus {
+		border: 2px solid ${colors.darkBlue};
 	}
 `;
 const CustomButton = styled(Button)`
@@ -62,10 +80,12 @@ const CustomButton = styled(Button)`
 	color: ${colors.white};
 	background-color: ${colors.logoDarkBlue};
 	border: none;
-	width: 23rem;
+	height: 3rem;
+	min-width: 12rem;
 	font-size: 1rem;
 	font-weight: 700;
 	border-radius: 5px;
+	align-self: center;
 	cursor: pointer;
 `;
 const Register = () => {
@@ -97,7 +117,7 @@ const Register = () => {
 					>
 						<StyledInput />
 					</FormItem>
-					<CustomButton>Register</CustomButton>
+					<CustomButton size="large">Register</CustomButton>
 				</Form>
 			</FormContainer>
 			<ImageContainer>
