@@ -16,7 +16,7 @@ const ImageContainer = styled.div`
 const MainContainer = styled.div`
 	display: flex;
 	width: 900px;
-	margin: 4rem auto;
+	margin: 4rem auto 0 auto;
 	box-shadow: 0 0 7px #ced3e0;
 	border-radius: 5px;
 	@media only screen and (max-width: 600px) {
@@ -28,7 +28,7 @@ const MainContainer = styled.div`
 const FormContainer = styled.div`
 	width: 50%;
 	.ant-form {
-		padding: 2rem;
+		padding: 1rem 2rem 2rem 2rem;
 	}
 
 	.ant-form-item-explain-error {
@@ -45,7 +45,7 @@ const FormItem = styled(Form.Item)`
 	&& {
 		margin: 1rem 0;
 		.ant-form-item-label {
-			margin-bottom: 1rem;
+			margin-bottom: 0.5rem;
 			font-weight: 700;
 			color: ${colors.logoDarkBlue};
 		}
@@ -66,7 +66,7 @@ const StyledInput = styled.input`
 	border: 2px solid #ced3e0;
 	border-radius: 5px;
 	outline: none;
-	height: 3rem;
+	height: 2.5rem;
 	font-size: 1.25rem;
 	transition: all 0.2s;
 	width: -webkit-fill-available;
@@ -89,13 +89,18 @@ const CustomButton = styled(Button)`
 	cursor: pointer;
 `;
 const Register = () => {
+	const [registerForm] = Form.useForm();
+	const handleRegister = async () => {
+		await registerForm.validateFields();
+		await registerForm.getFieldsValue();
+	};
 	return (
 		<MainContainer>
 			<FormContainer>
 				<StyledHeader>
 					Welcome to <span>GoalsToReach</span>
 				</StyledHeader>
-				<Form layout="vertical">
+				<Form layout="vertical" form={registerForm}>
 					<FormItem
 						label="Username"
 						name="name"
@@ -106,7 +111,8 @@ const Register = () => {
 					<FormItem
 						label="Email"
 						name="email"
-						rules={[{ required: true, message: "Please input your username!" }]}
+						type="email"
+						rules={[{ required: true, message: "Please input your email!" }]}
 					>
 						<StyledInput />
 					</FormItem>
@@ -115,9 +121,20 @@ const Register = () => {
 						name="password"
 						rules={[{ required: true, message: "Please input your password!" }]}
 					>
-						<StyledInput />
+						<StyledInput type="password" />
 					</FormItem>
-					<CustomButton size="large">Register</CustomButton>
+					<FormItem
+						label="Confirm Password"
+						name="confirmPassword"
+						rules={[
+							{ required: true, message: "Please confirm your password!" },
+						]}
+					>
+						<StyledInput type="password" />
+					</FormItem>
+					<CustomButton size="large" onClick={handleRegister}>
+						Register
+					</CustomButton>
 				</Form>
 			</FormContainer>
 			<ImageContainer>
