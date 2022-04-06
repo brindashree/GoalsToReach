@@ -1,7 +1,12 @@
 import styled from "styled-components";
-import { Form, Button } from "antd";
+import { Form, Button, Spin } from "antd";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import goalImage from "../assets/goal.jpg";
 import colors from "../themes/colors";
+import { register, reset } from "../features/auth/authSlice";
+import { useEffect } from "react";
 
 const ImageContainer = styled.div`
 	width: 50%;
@@ -89,11 +94,43 @@ const CustomButton = styled(Button)`
 	cursor: pointer;
 `;
 const Register = () => {
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const { user, isLoading, isError, isSuccess, message } = useSelector(
+		(state) => state.auth
+	);
 	const [registerForm] = Form.useForm();
+
+	useEffect(() => {
+		if (isError) {
+			toast.error(message);
+		}
+		if (isSuccess || user) {
+			navigate("/");
+		}
+		dispatch(reset());
+	}, [user, isError, isSuccess, message, navigate, dispatch]);
+
 	const handleRegister = async () => {
 		await registerForm.validateFields();
 		await registerForm.getFieldsValue();
+		const { name, email, password, confirmPassword } =
+			registerForm.getFieldsValue();
+		if (password !== confirmPassword) {
+			toast.error("Passwords do not match");
+		} else {
+			const userData = {
+				name,
+				email,
+				password,
+			};
+			console.log({ userData });
+			dispatch(register(userData));
+		}
 	};
+	if (isLoading) {
+		return <Spin size="large" />;
+	}
 	return (
 		<MainContainer>
 			<FormContainer>
