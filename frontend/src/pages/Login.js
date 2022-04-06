@@ -1,6 +1,11 @@
 import styled from "styled-components";
-import { Form, Button } from "antd";
+import { Form, Button, Spin } from "antd";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 import goalImage from "../assets/goal.jpg";
+import { login, reset } from "../features/auth/authSlice";
 import colors from "../themes/colors";
 
 const ImageContainer = styled.div`
@@ -91,13 +96,44 @@ const CustomButton = styled(Button)`
 	cursor: pointer;
 `;
 function Login() {
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const { user, isLoading, isError, isSuccess, message } = useSelector(
+		(state) => state.auth
+	);
+	const [loginForm] = Form.useForm();
+
+	useEffect(() => {
+		if (isError) {
+			toast.error(message);
+		}
+		if (isSuccess || user) {
+			navigate("/");
+		}
+		dispatch(reset());
+	}, [user, isError, isSuccess, message, navigate, dispatch]);
+
+	const handleLogin = async () => {
+		await loginForm.validateFields();
+		await loginForm.getFieldsValue();
+		const { email, password } = loginForm.getFieldsValue();
+		const userData = {
+			email,
+			password,
+		};
+		dispatch(login(userData));
+	};
+
+	if (isLoading) {
+		return <Spin size="large" />;
+	}
 	return (
 		<MainContainer>
 			<FormContainer>
 				<StyledHeader>
 					Welcome to <span>GoalsToReach</span>
 				</StyledHeader>
-				<Form layout="vertical">
+				<Form layout="vertical" form={loginForm}>
 					<FormItem
 						label="Email"
 						name="email"
@@ -110,9 +146,11 @@ function Login() {
 						name="password"
 						rules={[{ required: true, message: "Please input your password!" }]}
 					>
-						<StyledInput />
+						<StyledInput type="password" />
 					</FormItem>
-					<CustomButton size="large">Login</CustomButton>
+					<CustomButton size="large" onClick={handleLogin}>
+						Login
+					</CustomButton>
 				</Form>
 			</FormContainer>
 			<ImageContainer>

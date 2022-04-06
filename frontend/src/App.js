@@ -1,4 +1,6 @@
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Layout } from "antd";
 import Header from "./components/Header";
 import Dashboard from "./pages/Dashboard";
@@ -24,6 +26,7 @@ function App() {
 						<Route path="/login" element={<Login />} />
 						<Route path="/register" element={<Register />} />
 					</Routes>
+					<ToastContainer />
 				</Content>
 			</Layout>
 		</Layout>
