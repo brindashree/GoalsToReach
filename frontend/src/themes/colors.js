@@ -1,6 +1,6 @@
 const colors = {
 	darkBlue: "#2C3246",
-	lightBlue: "#50A8EA",
+	lightBlue: "#E4EAFD",
 	primaryGray: "#9195A0",
 	white: "#F3F4FF",
 	logoDarkBlue: "#0E0369",
