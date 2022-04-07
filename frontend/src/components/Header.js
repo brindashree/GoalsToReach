@@ -46,6 +46,7 @@ const CustomButton = styled(Button)`
 	border: none;
 	font-size: 0.9rem;
 	font-weight: 700;
+	font-family: "Nunito", sans-serif;
 	border-radius: 5px;
 	cursor: pointer;
 `;
