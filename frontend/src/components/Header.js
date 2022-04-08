@@ -8,10 +8,12 @@ import { logout, reset } from "../features/auth/authSlice";
 
 const { Header } = Layout;
 const StyledHeader = styled(Header)`
-	height: 4rem;
-	background-color: ${colors.logoDarkBlue};
-	display: flex;
-	justify-content: space-between;
+	&& {
+		height: 4rem;
+		background-color: ${colors.logoDarkBlue};
+		display: flex;
+		justify-content: space-between;
+	}
 `;
 const Logo = styled.div`
 	display: flex;
@@ -26,6 +28,9 @@ const Logo = styled.div`
 		font-size: 1.5rem;
 		font-weight: 500;
 	}
+	@media only screen and (max-width: 600px) {
+		margin: 0 0.2rem;
+	}
 `;
 const NavLinks = styled.div`
 	display: flex;
@@ -39,16 +44,17 @@ const NavLinks = styled.div`
 	}
 `;
 const CustomButton = styled(Button)`
-	padding: 0.8rem;
-	color: ${colors.white};
-	margin: 0 1rem;
-	background-color: ${colors.logoLightBlue};
-	border: none;
-	font-size: 0.9rem;
-	font-weight: 700;
-	font-family: "Nunito", sans-serif;
-	border-radius: 5px;
-	cursor: pointer;
+	&& {
+		color: ${colors.white};
+		margin: 0 1rem;
+		background-color: ${colors.logoLightBlue};
+		border: none;
+		font-size: 0.9rem;
+		font-weight: 700;
+		font-family: "Nunito", sans-serif;
+		border-radius: 5px;
+		cursor: pointer;
+	}
 `;
 
 function MainHeader() {

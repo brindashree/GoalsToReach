@@ -6,29 +6,27 @@ import Header from "./components/Header";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import styled from "styled-components";
+import colors from "./themes/colors";
 const { Content } = Layout;
-
-//  <Layout>
-// 		<Sider>Sider</Sider>
-// 		<Layout>
-// 			<Header>Header</Header>
-// 			<Content>Content</Content>
-// 			<Footer>Footer</Footer>
-// 		</Layout>
-//  </Layout>;
+const StyledContent = styled(Content)`
+	&& {
+		background-color: ${colors.basicWhite};
+	}
+`;
 function App() {
 	return (
 		<Layout>
 			<Layout>
 				<Header />
-				<Content>
+				<StyledContent>
 					<Routes>
 						<Route path="/" element={<Dashboard />} />
 						<Route path="/login" element={<Login />} />
 						<Route path="/register" element={<Register />} />
 					</Routes>
 					<ToastContainer />
-				</Content>
+				</StyledContent>
 			</Layout>
 		</Layout>
 	);

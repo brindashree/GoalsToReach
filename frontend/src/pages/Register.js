@@ -48,9 +48,8 @@ const FormContainer = styled.div`
 `;
 const FormItem = styled(Form.Item)`
 	&& {
-		margin: 1rem 0;
+		margin-top: 1rem;
 		.ant-form-item-label {
-			margin-bottom: 0.5rem;
 			font-weight: 700;
 			color: ${colors.logoDarkBlue};
 		}
@@ -60,7 +59,7 @@ const StyledHeader = styled.p`
 	font-size: 1.5rem;
 	text-align: center;
 	font-weight: 700;
-	margin: 1rem;
+	margin: 0.5rem;
 	color: ${colors.logoDarkBlue};
 	span {
 		color: ${colors.logoLightBlue};
@@ -72,7 +71,7 @@ const StyledInput = styled.input`
 	border-radius: 5px;
 	outline: none;
 	height: 2.5rem;
-	font-size: 1.25rem;
+	font-size: 1.1rem;
 	transition: all 0.2s;
 	width: -webkit-fill-available;
 	&:focus {
@@ -80,18 +79,32 @@ const StyledInput = styled.input`
 	}
 `;
 const CustomButton = styled(Button)`
-	padding: 1rem;
-	margin-top: 1rem;
-	color: ${colors.white};
-	background-color: ${colors.logoDarkBlue};
-	border: none;
-	height: 3rem;
-	min-width: 12rem;
-	font-size: 1rem;
-	font-weight: 700;
-	border-radius: 5px;
-	align-self: center;
-	cursor: pointer;
+	&& {
+		margin-top: 1rem;
+		color: ${colors.white};
+		background-color: ${colors.logoDarkBlue};
+		border: none;
+		height: 3rem;
+		min-width: 12rem;
+		font-size: 1rem;
+		font-weight: 700;
+		border-radius: 5px;
+		align-self: center;
+		cursor: pointer;
+		&:hover,
+		&:focus {
+			color: ${colors.white};
+			background-color: ${colors.logoDarkBlue};
+		}
+	}
+`;
+const StyledSpin = styled(Spin)`
+	&& {
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 `;
 const Register = () => {
 	const navigate = useNavigate();
@@ -129,7 +142,7 @@ const Register = () => {
 		}
 	};
 	if (isLoading) {
-		return <Spin size="large" />;
+		return <StyledSpin size="large" />;
 	}
 	return (
 		<MainContainer>

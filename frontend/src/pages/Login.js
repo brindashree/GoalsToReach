@@ -74,7 +74,7 @@ const StyledInput = styled.input`
 	border-radius: 5px;
 	outline: none;
 	height: 3rem;
-	font-size: 1.25rem;
+	font-size: 1.1rem;
 	transition: all 0.2s;
 	width: -webkit-fill-available;
 	&:focus {
@@ -82,7 +82,6 @@ const StyledInput = styled.input`
 	}
 `;
 const CustomButton = styled(Button)`
-	padding: 1rem;
 	margin-top: 1rem;
 	color: ${colors.white};
 	background-color: ${colors.logoDarkBlue};
@@ -94,6 +93,19 @@ const CustomButton = styled(Button)`
 	border-radius: 5px;
 	align-self: center;
 	cursor: pointer;
+	&:hover,
+	&:focus {
+		color: ${colors.white};
+		background-color: ${colors.logoDarkBlue};
+	}
+`;
+const StyledSpin = styled(Spin)`
+	&& {
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 `;
 function Login() {
 	const navigate = useNavigate();
@@ -125,7 +137,7 @@ function Login() {
 	};
 
 	if (isLoading) {
-		return <Spin size="large" />;
+		return <StyledSpin size="large" />;
 	}
 	return (
 		<MainContainer>
