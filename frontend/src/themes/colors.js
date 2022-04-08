@@ -6,5 +6,6 @@ const colors = {
 	logoDarkBlue: "#0E0369",
 	logoLightBlue: "#4a4cf6",
 	alertRed: "#f87171",
+	basicWhite: "#ffffff",
 };
 export default colors;

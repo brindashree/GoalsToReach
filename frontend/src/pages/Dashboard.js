@@ -10,19 +10,38 @@ import colors from "../themes/colors";
 
 const Greeting = styled.div`
 	text-align: center;
-	font-size: 1.2rem;
-	font-weight: 600;
+	font-size: 1.25rem;
+	font-weight: 900;
 	padding: 1rem 0;
-	color: ${colors.darkBlue};
-	background-color: ${colors.lightBlue};
+	color: ${colors.logoLightBlue};
 `;
 const MainContainer = styled.div`
 	max-width: 900px;
 	margin: 0 auto;
+	min-height: 90vh;
 `;
 const GoalsContainer = styled.div`
 	display: grid;
-	grid-template-columns: auto auto auto;
+	grid-template-columns: 1fr 1fr;
+
+	@media only screen and (max-width: 600px) {
+		grid-template-columns: 1fr;
+	}
+`;
+const StyledSpin = styled(Spin)`
+	&& {
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+`;
+const StyledEmptyMessage = styled.div`
+	text-align: center;
+	font-size: 1.25rem;
+	padding: 1rem 0;
+	font-weight: 500;
+	color: ${colors.darkBlue};
 `;
 function Dashboard() {
 	const navigate = useNavigate();
@@ -32,6 +51,7 @@ function Dashboard() {
 	const { goals, isLoading, isError, message } = useSelector(
 		(state) => state.goals
 	);
+
 	useEffect(() => {
 		if (isError) {
 			console.log(message);
@@ -46,27 +66,25 @@ function Dashboard() {
 	}, [user, navigate, isError, message, dispatch]);
 
 	if (isLoading) {
-		return <Spin size="large" />;
+		return <StyledSpin size="large" />;
 	}
 
 	return (
-		<>
+		<MainContainer>
 			<Greeting>Welcome {user && user.name}</Greeting>
-			<MainContainer>
-				<GoalForm />
+
+			<GoalForm />
+
+			{goals && goals.length > 0 ? (
 				<GoalsContainer>
-					{goals && goals.length > 0 ? (
-						<div>
-							{goals.map((goal) => (
-								<GoalItem key={goal._id} goal={goal} />
-							))}
-						</div>
-					) : (
-						<h3>You have not set any goals</h3>
-					)}
+					{goals.map((goal) => (
+						<GoalItem key={goal._id} goal={goal} />
+					))}
 				</GoalsContainer>
-			</MainContainer>
-		</>
+			) : (
+				<StyledEmptyMessage>You have not set any goals</StyledEmptyMessage>
+			)}
+		</MainContainer>
 	);
 }
 

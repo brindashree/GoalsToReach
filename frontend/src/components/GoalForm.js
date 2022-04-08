@@ -7,8 +7,6 @@ import { createGoal } from "../features/goals/goalSlice";
 const FormItem = styled(Form.Item)`
 	&& {
 		margin: 1rem;
-		display: flex;
-		flex-direction: column;
 	}
 `;
 const StyledInput = styled.input`
@@ -19,7 +17,7 @@ const StyledInput = styled.input`
 	height: 2.5rem;
 	font-size: 1rem;
 	transition: all 0.2s;
-	width: 70%;
+	width: -webkit-fill-available;
 	@media only screen and (max-width: 600px) {
 		width: -webkit-fill-available;
 	}
@@ -28,19 +26,16 @@ const StyledInput = styled.input`
 	}
 `;
 const CustomButton = styled(Button)`
-	padding: 0.8rem;
-	width: 20%;
-	color: ${colors.white};
-	margin: 0 1rem;
-	background-color: ${colors.logoDarkBlue};
-	border: none;
-	font-size: 0.9rem;
-	font-weight: 700;
-	border-radius: 5px;
-	cursor: pointer;
-	@media only screen and (max-width: 600px) {
-		width: -webkit-fill-available;
-		margin: 1rem 0;
+	&& {
+		width: 10rem;
+		color: ${colors.white};
+		margin: 0 1rem;
+		background-color: ${colors.logoDarkBlue};
+		border: none;
+		font-size: 0.9rem;
+		font-weight: 700;
+		border-radius: 5px;
+		cursor: pointer;
 	}
 `;
 const GoalForm = () => {
